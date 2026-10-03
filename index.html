@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shekinah Udegbue</title>
+<meta name="description" content="Shekinah Udegbue — CS student at the University of Houston building systems in C++, Python, and AWS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F2F4F7;
+  --surface: #FFFFFF;
+  --ink: #1A2230;
+  --muted: #5A6577;
+  --line: #D8DDE5;
+  --bid: #0E7266;
+  --ask: #A8324F;
+  --link: #2F43C2;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12171F; --surface: #1A212C; --ink: #E7EBF1; --muted: #9AA5B5;
+    --line: #2B3442; --bid: #3CC2AE; --ask: #F0708F; --link: #8E9CFF;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12171F; --surface: #1A212C; --ink: #E7EBF1; --muted: #9AA5B5;
+  --line: #2B3442; --bid: #3CC2AE; --ask: #F0708F; --link: #8E9CFF;
+}
+*, *::before, *::after { box-sizing: inherit; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+a { color: var(--link); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 2px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* Hero */
+.hero {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 5rem 0 4rem;
+}
+h1 {
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  margin: 0 0 1.25rem;
+}
+.intro { font-size: 1.2rem; color: var(--muted); max-width: 34ch; margin: 0 0 1.75rem; }
+.intro strong { color: var(--ink); font-weight: 600; }
+.contact { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; font-weight: 500; }
+
+/* Live order book */
+.book {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.25rem 1.25rem 1rem;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.9rem;
+}
+.book-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem; }
+.book-title { font-family: "Instrument Sans", system-ui, sans-serif; font-weight: 600; font-size: 0.95rem; }
+.book-meta { color: var(--muted); font-size: 0.78rem; }
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+}
+.row .depth { position: absolute; top: 0; bottom: 0; right: 0; border-radius: 3px; opacity: 0.14; transition: width 0.35s ease; }
+.row span { position: relative; }
+.row .qty { text-align: right; }
+.ask .price { color: var(--ask); } .ask .depth { background: var(--ask); }
+.bid .price { color: var(--bid); } .bid .depth { background: var(--bid); }
+.spread { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 0.45rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); margin: 0.35rem 0; }
+.trade { margin-top: 0.75rem; color: var(--muted); font-size: 0.78rem; min-height: 1.3em; }
+.flash { animation: flash 0.6s ease; }
+@keyframes flash { from { background: color-mix(in srgb, var(--ink) 12%, transparent); } to { background: transparent; } }
+
+/* Sections */
+section { padding: 2.5rem 0; border-top: 1px solid var(--line); }
+h2 { font-size: 1.6rem; letter-spacing: -0.02em; margin: 0 0 1.5rem; }
+.projects { display: grid; gap: 2rem; }
+.project h3 { font-size: 1.2rem; margin: 0 0 0.2rem; }
+.project .stack { color: var(--muted); font-size: 0.95rem; margin: 0 0 0.5rem; }
+.project p { margin: 0 0 0.5rem; max-width: 68ch; }
+.status { font-size: 0.85rem; color: var(--bid); font-weight: 600; }
+.jobs { display: grid; gap: 1.25rem; }
+.job { display: grid; grid-template-columns: 1fr auto; gap: 0 1rem; }
+.job h3 { font-size: 1.05rem; margin: 0; }
+.job .when { color: var(--muted); font-size: 0.95rem; }
+.job p { grid-column: 1 / -1; margin: 0.2rem 0 0; color: var(--muted); max-width: 68ch; }
+footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.95rem; }
+
+@media (max-width: 820px) {
+  .hero { grid-template-columns: 1fr; gap: 2.25rem; padding: 3rem 0 2.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .row .depth { transition: none; }
+  .flash { animation: none; }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hero">
+    <div>
+      <h1>Shekinah Udegbue</h1>
+      <p class="intro">Computer science student at the University of Houston, graduating May 2027. I build <strong>low-latency systems in C++</strong>, <strong>control systems in Python</strong>, and <strong>cloud platforms on AWS</strong>.</p>
+      <nav class="contact" aria-label="Contact">
+        <a href="mailto:shekinahudegbue@gmail.com">shekinahudegbue@gmail.com</a>
+        <a href="https://github.com/shekinahudegbue">GitHub</a>
+        <a href="https://www.linkedin.com/in/shekinah-udegbue-94833823a/">LinkedIn</a>
+      </nav>
+    </div>
+
+    <figure class="book" aria-label="Live demo of a limit order book" role="img">
+      <div class="book-head">
+        <span class="book-title">Order book, live</span>
+        <span class="book-meta">simulated</span>
+      </div>
+      <div id="asks"></div>
+      <div class="spread" id="spread">spread</div>
+      <div id="bids"></div>
+      <div class="trade" id="trade" aria-live="off"></div>
+    </figure>
+  </header>
+
+  <section aria-labelledby="projects-h">
+    <h2 id="projects-h">Projects</h2>
+    <div class="projects">
+      <article class="project">
+        <h3>Quadrotor hover stabilization</h3>
+        <p class="stack">Python, NumPy, SciPy &middot; team of 3 &middot; <span class="status">In progress</span></p>
+        <p>An optimal (LQR) controller that keeps a quadrotor, a nonlinear and underactuated robot, steady in a hover. We linearize the dynamics around hover and solve the continuous-time algebraic Riccati equation two ways, with Schur decomposition and the matrix sign function, then test recovery from disturbances and simulated wind.</p>
+      </article>
+
+      <article class="project">
+        <h3>Tradbot-Engine: limit order book</h3>
+        <p class="stack">C++17</p>
+        <p>A matching engine with price-time priority, partial fills, and iceberg orders that refill from hidden reserve and move to the back of the queue. Benchmarked at about 200 ns median and 2.7 &micro;s p99 latency across 100,000 randomized orders. Next up: a custom memory pool to cut worst-case spikes.</p>
+        <p><a href="https://github.com/shekinahudegbue/Tradbot-Engine">View the code</a></p>
+      </article>
+
+      <article class="project">
+        <h3>Field service and work-order platform</h3>
+        <p class="stack">AWS, React, SQL &middot; founder</p>
+        <p>A maintenance platform piloting with a pool service company with 9 active accounts. It tracks every job from request to payment, recommends chemical dosing from water tests, and is built for isolated single-tenant deployments, with Cognito sign-in and a field-level audit log.</p>
+      </article>
+
+      <article class="project">
+        <h3>Spatial AI assistant for accessibility</h3>
+        <p class="stack">Python, vector database &middot; HackTX 2024</p>
+        <p>An assistant that stores and retrieves real-time spatial context about a room to help mobility-impaired users move through it. Demoed to judges at HackTX.</p>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="exp-h">
+    <h2 id="exp-h">Experience</h2>
+    <div class="jobs">
+      <div class="job">
+        <h3>Software Engineer Intern, SparkGraceful Growth</h3>
+        <span class="when">Summer 2025</span>
+        <p>Diagnosed cloud-database sync failures across 20+ Shopify merchant cases and built a sync system from scratch.</p>
+      </div>
+      <div class="job">
+        <h3>Software Engineering Intern, Fogaec Electrophysics</h3>
+        <span class="when">Summer 2024</span>
+        <p>Built an ERP model for commissioning operations and planned its migration to Azure SQL Server.</p>
+      </div>
+      <div class="job">
+        <h3>AI Trainer and Data Annotator, Remotasks</h3>
+        <span class="when">Jan–Jun 2024</span>
+        <p>Completed about 4,800 AI model evaluations in the top quality tier and was promoted to harder coding and reasoning tasks.</p>
+      </div>
+      <div class="job">
+        <h3>Pharmacy Technician, Walgreens</h3>
+        <span class="when">Current</span>
+        <p>Working with patients, pharmacists, and providers in a fast-paced, regulated setting while finishing my degree.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Houston, Texas. Reach me at <a href="mailto:shekinahudegbue@gmail.com">shekinahudegbue@gmail.com</a>.</p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  const asksEl = document.getElementById("asks");
+  const bidsEl = document.getElementById("bids");
+  const spreadEl = document.getElementById("spread");
+  const tradeEl = document.getElementById("trade");
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  let mid = 100.00;
+  const levels = 5;
+  let asks = [], bids = [];
+
+  function rnd(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+  function build() {
+    asks = []; bids = [];
+    for (let i = 1; i <= levels; i++) {
+      asks.push({ price: +(mid + i * 0.05).toFixed(2), qty: rnd(20, 400) });
+      bids.push({ price: +(mid - i * 0.05).toFixed(2), qty: rnd(20, 400) });
+    }
+  }
+
+  function rowHTML(side, l, maxQty, flash) {
+    const w = Math.round((l.qty / maxQty) * 100);
+    return '<div class="row ' + side + (flash ? ' flash' : '') + '">' +
+      '<div class="depth" style="width:' + w + '%"></div>' +
+      '<span class="price">' + l.price.toFixed(2) + '</span>' +
+      '<span class="qty">' + l.qty + '</span></div>';
+  }
+
+  function render(flashSide, flashIdx) {
+    const maxQty = Math.max(...asks.map(a => a.qty), ...bids.map(b => b.qty));
+    asksEl.innerHTML = asks.slice().reverse().map((l, i) =>
+      rowHTML("ask", l, maxQty, flashSide === "ask" && levels - 1 - i === flashIdx)).join("");
+    bidsEl.innerHTML = bids.map((l, i) =>
+      rowHTML("bid", l, maxQty, flashSide === "bid" && i === flashIdx)).join("");
+    spreadEl.textContent = "spread " + (asks[0].price - bids[0].price).toFixed(2);
+  }
+
+  function step() {
+    const r = Math.random();
+    if (r < 0.35) {
+      // A buy or sell takes liquidity from the best level.
+      const buy = Math.random() < 0.5;
+      const book = buy ? asks : bids;
+      const size = rnd(10, 160);
+      const fill = Math.min(size, book[0].qty);
+      const price = book[0].price;
+      book[0].qty -= fill;
+      tradeEl.textContent = (buy ? "Buy " : "Sell ") + fill + " filled @ " + price.toFixed(2);
+      if (book[0].qty <= 0) {
+        // Level cleared: shift the book and add a new far level.
+        book.shift();
+        const last = book[book.length - 1].price;
+        book.push({ price: +(buy ? last + 0.05 : last - 0.05).toFixed(2), qty: rnd(20, 400) });
+      }
+      // Market makers step in when the spread gets too wide.
+      while (asks[0].price - bids[0].price > 0.151) {
+        const side = Math.random() < 0.5 ? asks : bids;
+        const isAsk = side === asks;
+        side.pop();
+        side.unshift({ price: +(isAsk ? side[0].price - 0.05 : side[0].price + 0.05).toFixed(2), qty: rnd(20, 200) });
+      }
+      render(buy ? "ask" : "bid", 0);
+    } else {
+      // New resting order joins a random level.
+      const side = Math.random() < 0.5 ? "ask" : "bid";
+      const book = side === "ask" ? asks : bids;
+      const i = rnd(0, levels - 1);
+      book[i].qty += rnd(5, 80);
+      render(side, i);
+    }
+  }
+
+  build();
+  render();
+  if (!reduce) setInterval(step, 900);
+})();
+</script>
+</body>
+</html>
